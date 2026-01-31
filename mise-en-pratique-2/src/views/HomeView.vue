@@ -27,6 +27,7 @@ const handleSubmit = () => {
     const user = {
       firstname: firstname.value,
       lastname: lastname.value,
+      email: email.value,
       legalStatus: legalStatus.value,
     }
     //J'ajoute cet objet user a mon tableau
@@ -83,14 +84,14 @@ const handleSubmit = () => {
 
     <div>
       <h1>Waiting List</h1>
-      <div v-if="waitingList.length > 0">
-        <ul v-for="(user, index) in waitingList" :key="index">
-          <li>{{ user.firstname }}</li>
-          <li>{{ user.lastname }}</li>
-          <li>{{ user.legalStatus }}</li>
-        </ul>
+      <p v-if="waitingList.length === 0">Nobody on the list yet !</p>
+      <div v-else>
+        <div v-for="(user, index) in waitingList" :key="index">
+          <p>Name : {{ user.firstname }} {{ user.lastname }}</p>
+          <p>Email :{{ user.email }}</p>
+          <p>is {{ user.legalStatus }}</p>
+        </div>
       </div>
-      <p v-else>Nobody on the list yet !</p>
     </div>
   </main>
 </template>

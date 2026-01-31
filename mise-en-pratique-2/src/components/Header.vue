@@ -5,22 +5,23 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <header>
-    <div>
+    <nav>
       <RouterLink :to="{ name: 'home' }">Home</RouterLink>
       <RouterLink :to="{ name: 'research' }">Research</RouterLink>
       <RouterLink :to="{ name: 'profile' }">Profile</RouterLink>
       <RouterLink :to="{ name: 'edit' }">Edit</RouterLink>
-    </div>
+    </nav>
   </header>
 </template>
 
 <style scoped>
 header {
+  height: 60px;
   display: flex;
   justify-content: center;
 }
 
-header div {
+header nav {
   display: flex;
   gap: 20px;
 }
