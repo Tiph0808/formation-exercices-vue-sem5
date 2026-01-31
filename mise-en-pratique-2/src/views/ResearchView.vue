@@ -1,4 +1,5 @@
-<script setup>
+<!-- My way :
+ <script setup>
 import { personsList } from '@/assets/data'
 import { ref } from 'vue'
 
@@ -31,8 +32,11 @@ const handleSubmit = () => {
     }
   }
 }
-</script>
+</script> -->
 
+<!-- // Correction : Avec La methode FIND-->
+
+<!-- My way :
 <template>
   <main>
     <div>
@@ -53,6 +57,51 @@ const handleSubmit = () => {
           <p>{{ personMatching.job }}</p>
         </div>
         <p v-else>sorry</p>
+      </div>
+    </div>
+  </main>
+</template> -->
+
+<!-- Correction : -->
+
+<script setup>
+import { personsList } from '@/assets/data'
+import { ref } from 'vue'
+
+const firstname = ref('')
+// console.log(personsList)
+
+const result = ref(null)
+// result est dabord null car on a rien tapé, ensuite deux possibilités (une fois qu'on a tapé) : match (le result sera un objet contenant les infos de la person qui match) or no match ( result sera undefined)
+
+const handleSubmit = () => {
+  // la methode find boucle SUR TOUS LES ELEMENTS d'un tableau --> elle donne donc accès a chaque element du tableau , un element = un objet = une personne = person
+  // on veut retourner l'element du tableau si il repond a une condition : est ce que le firstname de la person correspond à celui saisi dans l'input?
+  // on stocke cette valeur de retour dans une variable
+  const personFound = personsList.find((person) => {
+    return firstname.value === person.firstname
+  })
+  console.log(personFound)
+  result.value = personFound //personFound sera soit un obj soit undefined
+}
+</script>
+
+<template>
+  <main>
+    <div>
+      <h1>Research by name</h1>
+      <form @submit.prevent="handleSubmit">
+        <input type="text" name="firstname" v-model="firstname" />
+        <button>Search</button>
+      </form>
+    </div>
+    <div>
+      <p v-if="result === null">Enter a first name</p>
+      <p v-else-if="result === undefined">This name doesn't exist</p>
+      <div v-else>
+        <p>{{ result.firstname }} {{ result.lastname }}</p>
+        <p>{{ result.age }}</p>
+        <p>{{ result.job }}</p>
       </div>
     </div>
   </main>
