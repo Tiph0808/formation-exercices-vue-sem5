@@ -10,11 +10,12 @@ const router = useRouter()
 const globalStore = inject('GlobalStore')
 
 //  je crée une ref pour mes nouvelles infos
+//Bonus : pour préremplir les cases avec les valeurs de la page profile, je vais cherccher les infos dans mon provider qui me les transmet sous la clé userInfos :
 const newUser = ref({
-  newFirstname: 'Sophia',
-  newLastname: 'Rodriguez',
-  newJob: 'environemental scientist',
-  newAge: 31,
+  newFirstname: globalStore.userInfos.value.firstname,
+  newLastname: globalStore.userInfos.value.lastname,
+  newJob: globalStore.userInfos.value.job,
+  newAge: globalStore.userInfos.value.age,
 })
 
 // Je combine plusieures actions a la soumission du formulaire
