@@ -17,8 +17,10 @@ import { RouterLink } from 'vue-router'
 <style scoped>
 header {
   height: 60px;
+  border-bottom: 2px solid #ffc400;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 header nav {

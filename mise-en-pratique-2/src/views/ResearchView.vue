@@ -79,7 +79,10 @@ const handleSubmit = () => {
   // on veut retourner l'element du tableau si il repond a une condition : est ce que le firstname de la person correspond à celui saisi dans l'input?
   // on stocke cette valeur de retour dans une variable
   const personFound = personsList.find((person) => {
-    return firstname.value === person.firstname
+    return (
+      firstname.value.toLowerCase() === person.firstname.toLowerCase() ||
+      firstname.value.toLowerCase() === person.lastname.toLowerCase()
+    )
   })
   console.log(personFound)
   result.value = personFound //personFound sera soit un obj soit undefined
@@ -98,7 +101,7 @@ const handleSubmit = () => {
     <div>
       <p v-if="result === null">Enter a first name</p>
       <p v-else-if="result === undefined">This name doesn't exist</p>
-      <div v-else>
+      <div v-else class="result">
         <p>{{ result.firstname }} {{ result.lastname }}</p>
         <p>{{ result.age }}</p>
         <p>{{ result.job }}</p>
@@ -109,8 +112,31 @@ const handleSubmit = () => {
 
 <style scoped>
 main {
-  padding: 50px;
   display: flex;
-  justify-content: space-around;
+  height: calc(100vh - 60px);
+}
+
+main > div {
+  /* border: 1px solid red; */
+  flex: 1; /* pour qu'ils se partagent l'espace equitablement */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-left: 20px;
+}
+
+.result {
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.result p {
+  line-height: 20px;
+  text-align: center;
 }
 </style>

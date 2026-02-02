@@ -45,17 +45,14 @@ const handleSubmit = () => {
   <main>
     <div>
       <form @submit.prevent="handleSubmit">
-        <label for="firstname">
-          Firstname :
-          <input type="text" id="firstname" v-model="firstname" @input="errorMessage = ''"
-        /></label>
-        <label for="lastname">
-          Lastname : <input type="text" id="lastname" v-model="lastname" @input="errorMessage = ''"
-        /></label>
-        <label for="email">
-          Email : <input type="text" id="email" v-model="email" @input="errorMessage = ''"
-        /></label>
-        <div>
+        <label for="firstname"> Firstname :</label>
+        <input type="text" id="firstname" v-model="firstname" @input="errorMessage = ''" />
+        <label for="lastname"> Lastname :</label>
+        <input type="text" id="lastname" v-model="lastname" @input="errorMessage = ''" />
+        <label for="email"> Email :</label>
+        <input type="text" id="email" v-model="email" @input="errorMessage = ''" />
+
+        <div class="radio-buttons">
           <label for="adult">
             <input
               type="radio"
@@ -77,6 +74,7 @@ const handleSubmit = () => {
             />Minor</label
           >
         </div>
+
         <button>Add to Waiting List</button>
         <p v-if="errorMessage">{{ errorMessage }}</p>
       </form>
@@ -85,8 +83,8 @@ const handleSubmit = () => {
     <div>
       <h1>Waiting List</h1>
       <p v-if="waitingList.length === 0">Nobody on the list yet !</p>
-      <div v-else>
-        <div v-for="(user, index) in waitingList" :key="index">
+      <div v-else class="person-display">
+        <div v-for="(user, index) in waitingList" :key="index" class="person">
           <p>Name : {{ user.firstname }} {{ user.lastname }}</p>
           <p>Email :{{ user.email }}</p>
           <p>is {{ user.legalStatus }}</p>
@@ -98,26 +96,56 @@ const handleSubmit = () => {
 
 <style scoped>
 main {
-  margin: 50px;
   display: flex;
+  /* hauteru : tout la page moins le header */
+  height: calc(100vh - 60px);
+}
+
+main > div {
+  /* border: 1px solid red; */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 200px;
 }
+
 form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* width: 300px; */
   align-items: center;
 }
+
+/* "Tous les input sauf ceux de type radio" */
+input:not([type='radio']) {
+  width: 200px;
+}
+
 form > label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  margin: 20px 0 10px 0;
 }
-div {
+
+.radio-buttons {
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin: 20px 0px;
+}
+
+.person-display {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.person {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.person p {
+  line-height: 20px;
 }
 </style>
